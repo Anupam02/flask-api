@@ -13,6 +13,9 @@ app.secret_key = 'anupam'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+from db import db
+db.init_app(app)
+
 @app.before_first_request
 def create_tables():
     db.create_all()
@@ -26,7 +29,3 @@ api.add_resource(ClusterList, '/clusters')
 api.add_resource(MachineList, '/machines')
 api.add_resource(UserRegister, '/register')
 
-if __name__ == '__main__':
-    from db import db
-    db.init_app(app)
-    app.run(host='0.0.0.0', port=5000, debug=True)
