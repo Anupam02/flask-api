@@ -16,6 +16,10 @@ app.secret_key = 'anupam'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+app.route('/home')
+def home():
+    return {"message":"welcome to default page"}
+
 from db import db
 db.init_app(app)
 

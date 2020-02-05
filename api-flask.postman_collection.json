@@ -1,0 +1,529 @@
+{
+	"info": {
+		"_postman_id": "e521bfcb-6d83-4afb-99fb-a206a159a762",
+		"name": "api-flask",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "algoshelf-backend",
+			"item": [
+				{
+					"name": "/machines",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "93412ba9-2f85-4071-b637-7c3d51316c02",
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/machines",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"machines"
+							]
+						},
+						"description": "This should return a list of items, each in JSON format."
+					},
+					"response": []
+				},
+				{
+					"name": "/tags",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "93412ba9-2f85-4071-b637-7c3d51316c02",
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/tags",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tags"
+							]
+						},
+						"description": "This should return a list of items, each in JSON format."
+					},
+					"response": []
+				},
+				{
+					"name": "/clusters",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "93412ba9-2f85-4071-b637-7c3d51316c02",
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/clusters",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"clusters"
+							]
+						},
+						"description": "This should return a list of items, each in JSON format."
+					},
+					"response": []
+				},
+				{
+					"name": "/auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "57b91fa2-e1e7-4f88-95c2-ac6371f45325",
+								"exec": [
+									"var jsonData = pm.response.json()",
+									"",
+									"pm.test(\"Body matches access_token\", function()",
+									"{",
+									"    pm.expect(pm.response.text()).to.include(\"access_token\")",
+									"}) ",
+									"pm.environment.set(\"jwt_token\", jsonData.access_token)",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"anupam\",\n\t\"password\": \"anupam\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/auth",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth"
+							]
+						},
+						"description": "This should return a list of items, each in JSON format."
+					},
+					"response": []
+				},
+				{
+					"name": "/register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"anupam\",\n\t\"password\": \"anupam\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"register"
+							]
+						},
+						"description": "This should return a list of items, each in JSON format."
+					},
+					"response": []
+				},
+				{
+					"name": "/machine/<name: string>",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT  {{jwt_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/item/piano",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"item",
+								"piano"
+							]
+						},
+						"description": "This will return one specific item, uniquely identified by its name, No two items may have the same name."
+					},
+					"response": []
+				},
+				{
+					"name": "/tag/<name: string>",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT  {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/tag/tag1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tag",
+								"tag1"
+							]
+						},
+						"description": "This will return one specific item, uniquely identified by its name, No two items may have the same name."
+					},
+					"response": []
+				},
+				{
+					"name": "/cluster/<name: string>",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT  {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/cluster/piano",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cluster",
+								"piano"
+							]
+						},
+						"description": "This will return one specific store, uniquely identified by its name, No two items may have the same name."
+					},
+					"response": []
+				},
+				{
+					"name": "/machine/<name: string>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "35a4a8b5-54f8-49a4-a23a-e64ee82956b0",
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"ip_address\": \"12.23.22.12\",\n\t\"instance_type\": \"c3.4xlarge\",\n\t\"cluster_id\": 1\n}"
+						},
+						"url": {
+							"raw": "{{url}}/machine/node1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"machine",
+								"node1"
+							]
+						},
+						"description": "This will create a new   item, uniquely identified by its name, It would fail if item is already present."
+					},
+					"response": []
+				},
+				{
+					"name": "/tag/<name: string>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "35a4a8b5-54f8-49a4-a23a-e64ee82956b0",
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"machine_id\": 6\n}"
+						},
+						"url": {
+							"raw": "{{url}}/tag/tag3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tag",
+								"tag3"
+							]
+						},
+						"description": "This will create a new   item, uniquely identified by its name, It would fail if item is already present."
+					},
+					"response": []
+				},
+				{
+					"name": "/cluster/<name: string>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "35a4a8b5-54f8-49a4-a23a-e64ee82956b0",
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cloud_region\":\"us-east-1\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/cluster/cluster1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cluster",
+								"cluster1"
+							]
+						},
+						"description": "This will create a new   item, uniquely identified by its name, It would fail if item is already present."
+					},
+					"response": []
+				},
+				{
+					"name": "/machine/<name: string>",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"ip_address\": \"33.33.333.33\",\n\t\"instance_type\": \"x3.4xlarge\",\n\t\"cluster_id\": 3\n}"
+						},
+						"url": {
+							"raw": "{{url}}/machine/node1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"machine",
+								"node1"
+							]
+						},
+						"description": "this will either create or update a new item , if item is already there it will update it . PUT is a idempotent request it will not fail , even if we run it 10 times with one values, it will change for the first time only ."
+					},
+					"response": []
+				},
+				{
+					"name": "/tag/<name: string>",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"machine_id\": 1\n}"
+						},
+						"url": {
+							"raw": "{{url}}/tag/tag1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tag",
+								"tag1"
+							]
+						},
+						"description": "this will either create or update a new item , if item is already there it will update it . PUT is a idempotent request it will not fail , even if we run it 10 times with one values, it will change for the first time only ."
+					},
+					"response": []
+				},
+				{
+					"name": "/machine/<name: string>",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/machine/null",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"machine",
+								"null"
+							]
+						},
+						"description": "This will delete on item , uniquely identified by name."
+					},
+					"response": []
+				},
+				{
+					"name": "/tag/<name: string>",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/machine/null",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"machine",
+								"null"
+							]
+						},
+						"description": "This will delete on item , uniquely identified by name."
+					},
+					"response": []
+				},
+				{
+					"name": "/cluster/<name: string>",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/cluster/cluster2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cluster",
+								"cluster2"
+							]
+						},
+						"description": "This will delete on item , uniquely identified by name."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
